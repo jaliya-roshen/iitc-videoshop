@@ -1,0 +1,23 @@
+<p-card>
+    <p class="font-medium text-3xl text-900 mb-2 text-center">
+        New Member
+    </p>
+</p-card>
+<br>
+<p-card>
+    <div [formGroup]="form">
+        <div class="align-items-center justify-content-center">
+            <label for="firstname5" class="text-xl w-10 pr-7">Member Name</label>
+            <input id="memberName" type="username" pInputText formControlName="name" />
+        </div>
+        <br>
+        <div class="p-field">
+            <label for="firstname5" class="text-xl w-10 pr-6">Member Mobile</label>
+            <input id="memberMobile" type="username" pInputText formControlName="mobile" />
+        </div>
+        <div class="col-6">
+            <p-confirmPopup></p-confirmPopup>
+            <button pButton type="button" label="Go" class="p-button-danger" (click)="onSubmit($event)"></button>
+        </div>
+    </div>
+</p-card>

@@ -1,22 +1,33 @@
 <app-header></app-header>
 
-<div id="parent-container">
-    <div class="inline">
-        <div>
-            <h2> New member</h2>
+<div class="grid">
+    <div class="col">
+        <div class="text-center p-3 border-round-sm bg-blue-500 font-bold text-white">
+            <button pButton icon="pi pi-home" label="HomePage" routerLink="/"
+                class="text-sm w-10 text-center font-bold mr-3 text-white-500 w-2"></button>
         </div>
     </div>
-    <div class="go-button">
-        <button pButton pRipple type="button" class="p-button-danger">Go</button>
-    </div>
-</div>
-<div id="parent-container">
-    <div class="inline">
-        <div>
-            <h2>Movie Search</h2>
+    <div class="col">
+        <div class="text-center p-3 border-round-sm bg-blue-500 font-bold text-white">
+            <button pButton icon="pi pi-user" label="New Member" routerLink="/member"
+                class="text-sm w-10 text-center font-bold mr-3 text-white-500 w-2"></button>
         </div>
     </div>
-    <div class="go-button">
-        <button pButton pRipple type="button" class="p-button-danger">Go</button>
+    <div class="col">
+        <div class="text-center p-3 border-round-sm bg-blue-500 font-bold text-white">
+            <button [disabled]="disableMenu" icon="pi pi-youtube" label="Movie Search" pButton routerLink="/movie"
+                class="text-sm w-10 text-center font-bold mr-3 text-white-500 w-2"></button>
+        </div>
     </div>
-</div>
+    <div class="col">
+        <div class="text-center p-3 border-round-sm bg-blue-500 font-bold text-white">
+            <button pButton routerLink="#" class="text-sm w-10 text-center font-bold mr-3 text-white-500 w-2">Rent A
+                Movie</button>
+        </div>
+    </div>
+    </div>
+    <div class="grid">
+        <div class="col-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
