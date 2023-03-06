@@ -12,6 +12,11 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { RippleModule } from 'primeng/ripple';
+import { CalendarModule } from 'primeng/calendar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +27,9 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { IitcService } from 'src/services/iitc.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieService } from 'src/services/movie.service';
+import { RentMovieComponent } from './rent-movie/rent-movie.component';
+import { RentService } from 'src/services/rent.service';
+import { StorageService } from 'src/services/storage.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +38,7 @@ import { MovieService } from 'src/services/movie.service';
     NewMemberComponent,
     MainPageComponent,
     MovieSearchComponent,
+    RentMovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +54,21 @@ import { MovieService } from 'src/services/movie.service';
     InputTextModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
+    TableModule,
+    DropdownModule,
     HttpClientModule,
+    SplitButtonModule,
+    RippleModule,
+    CalendarModule,
   ],
-  providers: [ConfirmationService, MessageService, IitcService, MovieService],
+  providers: [
+    ConfirmationService,
+    MessageService,
+    IitcService,
+    MovieService,
+    RentService,
+    StorageService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
