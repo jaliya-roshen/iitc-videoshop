@@ -15,7 +15,14 @@
             <label for="firstname5" class="text-xl w-10 pr-6">Member Mobile</label>
             <input id="memberMobile" type="username" pInputText formControlName="mobile" />
         </div>
-        <div class="col-6">
+        <br>
+        <div class="p-field">
+            <label for="memberType" class="align-items-center justify-content-center text-xl w-10 pr-6">Member Type</label>
+            <p-dropdown [options]="memberTypes" placeholder="Select a member type" [showClear]="false" optionLabel="name"
+                formControlName="memberType"></p-dropdown>
+        </div>
+        <br>
+        <div class="field">
             <p-confirmPopup></p-confirmPopup>
             <button pButton type="button" label="Go" class="p-button-danger" (click)="onSubmit($event)"></button>
         </div>

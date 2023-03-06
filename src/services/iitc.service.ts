@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class IitcService {
   private subject = new Subject<any>();
+  private sendMemberData = new Subject<any>();
 
   constructor() {}
 
@@ -15,5 +16,13 @@ export class IitcService {
 
   receiveMessage(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  triggerMemberData(data: any) {
+    this.sendMemberData.next({ data });
+  }
+
+  getMemberData(): Observable<void> {
+    return this.sendMemberData.asObservable();
   }
 }

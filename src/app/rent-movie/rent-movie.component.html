@@ -1,0 +1,65 @@
+<div class="grid">
+    <div class="col-12">
+        <p class="text-3xl w-10">Movie Rent</p>
+        <form id="rent-movie-form" [formGroup]="rentMovieForm">
+            <div class="align-items-center justify-content-center">
+                <label for="firstname5" class="text-xl w-10 pr-7">Member Mobile</label>
+                <input id="memberName" type="username" pInputText formControlName="member_mobile" />
+                <p-button label="Search" icon="pi pi-search" class="pl-6"></p-button>
+            </div>
+            <div class="align-items-center justify-content-center pt-5">
+                <label for="firstname5" class="text-lg w-10 pr-7">Member Name</label>
+                <input id="memberName" type="username" pInputText formControlName="member_name" />
+            </div>
+            <div class="align-items-center justify-content-center pt-5">
+                <label for="firstname5" class="text-lg w-10 pr-7">Member Type</label>
+                <input id="memberName" type="username" pInputText formControlName="member_type" />
+            </div>
+        </form>
+        <div class="card">
+            <p class="text-3xl w-10">Selected</p>
+            <p-table #dt [value]="rentDetails" [rows]="10"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="name">Movie Name <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="type">Movie Type <p-sortIcon field="type"></p-sortIcon></th>
+                        <th pSortableColumn="renting">Renting</th>
+                        <th pSortableColumn="return">Return <p-sortIcon field="return"></p-sortIcon></th>
+                        <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rentDetails>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="rentDetails"></p-tableCheckbox>
+                        </td>
+                        <td>{{rentDetails.member.selected.movie_name}}</td>
+                        <td>{{rentDetails.member.selected.movie_type}}</td>
+                        <td><p-dropdown [options]="rentTypes" [(ngModel)]="SelectedRentType"
+                                optionLabel="name"></p-dropdown></td>
+                        <td>
+                            {{rentDetails.member.selected.return_date}}
+                        </td>
+                        <td>$56 USD</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <tr>
+                        <td>Total Amount:</td>
+                        <td>Amount</td>
+                        <td colspan="4" class="text-right">
+                            <button pButton pRipple type="button" label="Order Now"
+                                class="p-button-raised p-button-danger"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
