@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RentData } from 'src/core/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,7 @@ export class RentService {
 
   constructor(private http: HttpClient) {}
 
-  getRentDetails() {
-    return this.http.get(this.url);
+  getRentDetails(): Observable<RentData> {
+    return this.http.get<RentData>(this.url);
   }
 }

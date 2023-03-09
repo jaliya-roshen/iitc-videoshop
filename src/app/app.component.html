@@ -21,8 +21,8 @@
     </div>
     <div class="col">
         <div class="text-center p-3 border-round-sm bg-blue-500 font-bold text-white">
-            <button pButton routerLink="/rent" class="text-sm w-10 text-center font-bold mr-3 text-white-500 w-2">Rent A
-                Movie</button>
+            <button pButton [disabled]="disableMenu" label="Rent A Movie" icon="pi pi-shopping-cart" routerLink="/rent"
+                class="text-sm w-10 text-center font-bold mr-3 text-white-500 w-2"></button>
         </div>
     </div>
     </div>
