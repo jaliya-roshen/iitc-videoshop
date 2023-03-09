@@ -8,7 +8,8 @@
         "movie_name": "Name-01",
         "movie_type": "Drama",
         "return_date": "14th Feb 2023"
-      }
+      },
+      "rent_type": "Daily"
     }
   },
   {
@@ -20,7 +21,8 @@
         "movie_name": "Name-02",
         "movie_type": "Movie",
         "return_date": "12th Feb 2023"
-      }
+      },
+      "rent_type": "Weekly"
     }
   },
   {
@@ -32,7 +34,8 @@
         "movie_name": "Name-03",
         "movie_type": "Movie",
         "return_date": "15th Feb 2023"
-      }
+      },
+      "rent_type": "Daily"
     }
   }
 ]

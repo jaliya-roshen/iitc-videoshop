@@ -19,6 +19,7 @@ export class NewMemberComponent implements OnInit {
   public form: FormGroup;
   memberTypes: any = [];
   selectedMemberType: string;
+  isInvalid: boolean = true;
 
   constructor(
     formBuilder: FormBuilder,
@@ -52,7 +53,10 @@ export class NewMemberComponent implements OnInit {
     this.primeConfig.ripple = true;
   }
 
-  storageData() {
+  /**
+   * Store data in local Storage
+   */
+  private storageData(): void {
     const data = {
       name: this.form.value.name,
       mobile: this.form.value.mobile,
@@ -61,16 +65,19 @@ export class NewMemberComponent implements OnInit {
     this.storageService.setItem('logData', data);
   }
 
-  onSubmit(event: Event) {
+  onSubmit(event: Event): void {
+    // Check form is valid for not and activate movie search according to it
     if (this.form.status === 'VALID') {
       this.iitcService.sendMessage(false);
       this.router.navigateByUrl('/movie');
     }
 
     this.storageData();
+
     /**
      * Tried to Transfer Data using Subject: didn't succeed
      */
+
     // console.log('form values', this.form.value);
     // this.iitcService.triggerMemberData({
     //   name: this.form.value.name,

@@ -12,7 +12,6 @@ import { StorageService } from 'src/services/storage.service';
 export class MovieSearchComponent implements OnInit {
   public movies: any = [];
   movie: any;
-  movieArray: any = [];
   loading: boolean = true;
   memberData: MemberDetails = {
     mobile: '',
@@ -22,14 +21,14 @@ export class MovieSearchComponent implements OnInit {
   selectMovies: any;
   finalObj: any = {};
   isDisable: any = true;
-  TestVariable = {};
+  enableContent: boolean = false;
 
   constructor(
     private movieService: MovieService,
     private iitcService: IitcService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.movieService.getMoviesDetails().subscribe((data) => {
       this.movies = data;
       this.loading = false;
@@ -38,10 +37,16 @@ export class MovieSearchComponent implements OnInit {
         this.movie = movie;
       });
     });
+
+    this.iitcService.receiveMessage().subscribe((data) => {
+      console.log('debug subject', data);
+      this.enableContent = !data;
+    });
   }
 
-  onRowSelect(event: any) {
-    this.finalObj = { selected: this.selectMovies };
+  onRowSelect(event: any): void {
+    this.finalObj = [this.selectMovies];
     this.isDisable = false;
+    this.iitcService.triggerMemberData(this.finalObj);
   }
 }

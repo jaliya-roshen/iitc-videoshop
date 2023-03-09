@@ -15,9 +15,4 @@ export class MainPageComponent {
     console.log('button triggered');
     this.router.navigate(['/member']);
   }
-
-  onSelect(feature: string) {
-    console.log(feature);
-    this.featureSelected.emit(feature);
-  }
 }
