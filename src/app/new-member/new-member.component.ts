@@ -8,6 +8,7 @@ import {
   PrimeNGConfig,
 } from 'primeng/api';
 import { IitcService } from 'src/services/iitc.service';
+import { LoginService } from 'src/services/login.service';
 import { StorageService } from 'src/services/storage.service';
 
 @Component({
@@ -25,10 +26,10 @@ export class NewMemberComponent implements OnInit {
     formBuilder: FormBuilder,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private primeConfig: PrimeNGConfig,
     private router: Router,
     private iitcService: IitcService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private loginService: LoginService
   ) {
     this.form = formBuilder.group({
       name: ['', Validators.required],
@@ -49,9 +50,7 @@ export class NewMemberComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-    this.primeConfig.ripple = true;
-  }
+  ngOnInit() {}
 
   /**
    * Store data in local Storage
@@ -67,11 +66,15 @@ export class NewMemberComponent implements OnInit {
 
   onSubmit(event: Event): void {
     // Check form is valid for not and activate movie search according to it
-    if (this.form.status === 'VALID') {
+    const formStatus = this.form.status;
+    if (formStatus === 'VALID') {
+      //Activate router guard here
+      if (this.loginService.login(formStatus)) {
+        this.router.navigate(['/movie']);
+      }
       this.iitcService.sendMessage(false);
       this.router.navigateByUrl('/movie');
     }
-
     this.storageData();
 
     /**

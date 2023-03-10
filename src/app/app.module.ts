@@ -30,6 +30,7 @@ import { MovieService } from 'src/services/movie.service';
 import { RentMovieComponent } from './rent-movie/rent-movie.component';
 import { RentService } from 'src/services/rent.service';
 import { StorageService } from 'src/services/storage.service';
+import { LoginService } from 'src/services/login.service';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { StorageService } from 'src/services/storage.service';
     MovieService,
     RentService,
     StorageService,
+    LoginService,
   ],
   bootstrap: [AppComponent],
 })

@@ -10,9 +10,4 @@ export class MainPageComponent {
   @Output() featureSelected = new EventEmitter<string>();
 
   constructor(private router: Router) {}
-
-  onLoaderMember() {
-    console.log('button triggered');
-    this.router.navigate(['/member']);
-  }
 }

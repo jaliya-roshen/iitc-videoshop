@@ -99,18 +99,17 @@ export class RentMovieComponent implements OnInit {
     return this.totalAmount;
   }
 
+  /**
+   * Since fail to load data from movie search component
+   * get the login user data from local Storage
+   */
+
+  //TODO: Need to modify to get data without local storage
   retrieveData(): void {
     const retrievedData = this.storageService.getItem('logData');
     this.memberType = retrievedData.type;
     this.rentMovieForm.get('member_mobile')?.patchValue(retrievedData.mobile);
     this.rentMovieForm.get('member_name')?.patchValue(retrievedData.name);
     this.rentMovieForm.get('member_type')?.patchValue(retrievedData.type);
-  }
-
-  filterToSingleArray(data: any) {
-    this.memberArr = data.data
-      .reduce((acc: any, val: any) => acc.concat(val), [])
-      .flat();
-    console.log(this.memberArr);
   }
 }

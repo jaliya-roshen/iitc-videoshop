@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MemberDetails } from 'src/core/interfaces';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MemberDetails, Movie } from 'src/core/interfaces';
 import { IitcService } from 'src/services/iitc.service';
 import { MovieService } from 'src/services/movie.service';
 import { StorageService } from 'src/services/storage.service';
@@ -9,19 +10,16 @@ import { StorageService } from 'src/services/storage.service';
   templateUrl: './movie-search.component.html',
   styleUrls: ['./movie-search.component.css'],
 })
-export class MovieSearchComponent implements OnInit {
+export class MovieSearchComponent implements OnInit, OnDestroy {
   public movies: any = [];
   movie: any;
   loading: boolean = true;
-  memberData: MemberDetails = {
-    mobile: '',
-    name: '',
-    type: '',
-  };
-  selectMovies: any;
-  finalObj: any = {};
+  memberData: MemberDetails;
+  selectMovies: Movie;
+  finalObj: Movie;
   isDisable: any = true;
   enableContent: boolean = false;
+  messageSubscription: Subscription;
 
   constructor(
     private movieService: MovieService,
@@ -38,15 +36,22 @@ export class MovieSearchComponent implements OnInit {
       });
     });
 
-    this.iitcService.receiveMessage().subscribe((data) => {
-      console.log('debug subject', data);
-      this.enableContent = !data;
-    });
+    this.messageSubscription = this.iitcService
+      .receiveMessage()
+      .subscribe((data) => {
+        console.log('debug subject', data);
+        this.enableContent = !data;
+      });
   }
 
   onRowSelect(event: any): void {
-    this.finalObj = [this.selectMovies];
+    this.finalObj = this.selectMovies;
     this.isDisable = false;
+    console.log('selected Movies from Movie search Component', this.finalObj);
     this.iitcService.triggerMemberData(this.finalObj);
+  }
+
+  ngOnDestroy(): void {
+    this.messageSubscription.unsubscribe();
   }
 }
