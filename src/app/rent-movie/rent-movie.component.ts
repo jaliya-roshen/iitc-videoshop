@@ -45,7 +45,6 @@ export class RentMovieComponent implements OnInit {
 
     this.rentService.getRentDetails().subscribe((data) => {
       this.rentDetails = data;
-      console.log(data);
     });
 
     // this.iitcService.getMemberData().subscribe((data: any) => {
@@ -68,31 +67,32 @@ export class RentMovieComponent implements OnInit {
     });
   }
 
-  calculateAmounts() {
-    const basicMemberShipCost = 50;
-    const dailyBookCostBasic = 5;
-    const weeklyBookCostBasic = 25;
+  //TODO: Need to enhance this login with UI enhancement
+  calculateAmounts(): any {
+    const BASIC_MEMBERSHIP_COST = 50;
+    const DAILY_BOOK_COST_BASIC = 5;
+    const WEEKLY_BOOK_COST_BASIC = 25;
 
-    const premiumMemberShipCost = 75;
-    const dailyBookCostPremium = 3;
-    const weeklyBookCostPremium = 15;
+    const PREMIUM_MEMBERSHIP_COST = 75;
+    const DAILY_BOOK_COST_PREMIUM = 3;
+    const WEEKLY_BOOK_COST_PREMIUM = 15;
 
     this.totalAmount = 0;
 
     for (let i = 0; i < this.rentDetails.length; i++) {
       if (this.rentDetails[i].member.type === 'basic') {
-        this.totalAmount += basicMemberShipCost;
+        this.totalAmount += BASIC_MEMBERSHIP_COST;
         if (this.rentDetails[i].member.rent_type === 'Daily') {
-          this.totalAmount += dailyBookCostBasic;
+          this.totalAmount += DAILY_BOOK_COST_BASIC;
         } else if (this.rentDetails[i].member.rent_type === 'Weekly') {
-          this.totalAmount += weeklyBookCostBasic;
+          this.totalAmount += WEEKLY_BOOK_COST_BASIC;
         }
       } else if (this.rentDetails[i].member.type === 'premium') {
-        this.totalAmount += premiumMemberShipCost;
+        this.totalAmount += PREMIUM_MEMBERSHIP_COST;
         if (this.rentDetails[i].member.rent_type === 'Daily') {
-          this.totalAmount += dailyBookCostPremium;
+          this.totalAmount += DAILY_BOOK_COST_PREMIUM;
         } else if (this.rentDetails[i].member.rent_type === 'Weekly') {
-          this.totalAmount += weeklyBookCostPremium;
+          this.totalAmount += WEEKLY_BOOK_COST_PREMIUM;
         }
       }
     }
@@ -105,7 +105,7 @@ export class RentMovieComponent implements OnInit {
    */
 
   //TODO: Need to modify to get data without local storage
-  retrieveData(): void {
+  private retrieveData(): void {
     const retrievedData = this.storageService.getItem('logData');
     this.memberType = retrievedData.type;
     this.rentMovieForm.get('member_mobile')?.patchValue(retrievedData.mobile);
