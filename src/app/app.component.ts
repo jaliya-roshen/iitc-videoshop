@@ -1,5 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IitcService } from 'src/services/iitc.service';
 
 @Component({
@@ -7,15 +14,25 @@ import { IitcService } from 'src/services/iitc.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   disableMenu: boolean = true;
+  messageSubscription: Subscription;
 
   constructor(private router: Router, private iitcService: IitcService) {}
 
   ngOnInit(): void {
-    this.iitcService.receiveMessage().subscribe((data) => {
-      console.log('debug subject', data);
-      this.disableMenu = data;
-    });
+    /**
+     * This service used to enable navigation
+     * according to the user login
+     */
+    this.messageSubscription = this.iitcService
+      .receiveMessage()
+      .subscribe((data) => {
+        this.disableMenu = data;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.messageSubscription.unsubscribe();
   }
 }
